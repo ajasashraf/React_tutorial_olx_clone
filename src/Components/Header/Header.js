@@ -38,16 +38,24 @@ const history = useHistory();
           <Arrow></Arrow>
         </div>
         <div className="loginPage">
-          <span >{user ? `Welcome ${user.displayName}` : 'Login'}</span>
+          <span onClick={()=>{
+            history.push('/login')
+          }}>{user ? `Welcome ${user.displayName}` : 'Login'}</span>
           <hr />
         </div>
         {user && <span onClick={()=>{
           firebase.auth().signOut();
           history.push('/login');
-          }}>Logout</span> }
+          }} style={{cursor:'pointer'}}>Logout</span> }
        
 
-        <div className="sellMenu">
+        <div className="sellMenu" onClick={()=> {
+          if(user) {
+            history.push('/create')
+          }else {
+            history.push('/login')
+          }
+        }}>
           <SellButton></SellButton>
           <div className="sellMenuContent">
             <SellButtonPlus></SellButtonPlus>
